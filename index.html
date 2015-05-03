@@ -1,0 +1,136 @@
+<html>
+	<head>
+		<title>Workshop plumin.js</title>
+		<link rel="stylesheet" href="assets/css/styles.css">
+		<link rel='stylesheet' href='http://www.cnap.graphismeenfrance.fr/infini/css/infini-fontes.css'>
+	</head>
+	<body>
+
+		<form>
+			<input type="text" class="ville">
+		</form>
+
+		<div class="results">
+			<div>city :  <span id="city">-</span></div>
+			<div>country :  <span id="country">-</span></div>
+			<div>lat :  <span id="lat">-</span></div>
+			<div>long :  <span id="long">-</span></div>
+			<div>tempFar :  <span id="tempFar">-</span></div>
+			<div>tempDeg :  <span id="tempDeg">-</span></div>
+			<div>pressure :  <span id="pressure">-</span></div>
+			<div>rising :  <span id="rising">-</span></div>
+			<div>windChill :  <span id="windChill">-</span></div>
+			<div>windDirection :  <span id="windDirection">-</span></div>
+			<div>windSpeed :  <span id="windSpeed">-</span></div>
+		</div>
+
+		<div class="custom" contenteditable spellcheck="false">
+			abcdefghijklmnopqrstuvwxyz<br/>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>0123456789
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="assets/js/script.js"></script>
+		<script src="assets/js/plumin.min.js"></script>
+		<script src="assets/js/customFont.js"></script>
+
+
+		<script>
+			///////////////////////////////////////////////////////////////////
+			// On choisit la ville qui nous fournira les infos météo:
+			// On récupère la dernière valeur
+			// Sinon on met définit Berlin comme valeur par défaut
+			var ville = localStorage.getItem("ville") || 'berlin';
+
+			///////////////////////////////////////////////////////////////////
+			// Appel de l'API Yahoo Weather:
+			$.YQL = function(query, callback) {
+			    if (!query || !callback) {
+			        throw new Error('$.YQL(): Parameters may be undefined');
+			    }
+				var encodedQuery = encodeURIComponent(query.toLowerCase()),
+			        url = 'https://query.yahooapis.com/v1/public/yql?q='
+			            + encodedQuery + '&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=?';
+			    $.getJSON(url, callback);
+			};
+
+			///////////////////////////////////////////////////////////////////
+			// On récupère les données:
+			$.YQL("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+ ville +"')", function(data) {
+			    // Toutes les données accessibles
+				if( data.query.results == null ){ alert('Aucune ville ne correspond à cette recherche')};
+				var post = data.query.results.channel;
+
+				// on associe les données à des variables globales
+				window.city 			= data.query.results.channel.location.city;
+				window.country 			= data.query.results.channel.location.country;
+				window.lat 				= parseInt( data.query.results.channel.item.lat );
+				window.long 			= parseInt( data.query.results.channel.item.long );
+				window.tempFar 			= parseInt( data.query.results.channel.item.condition.temp );
+				window.tempDeg 			= convertFarenheit(tempFar);
+				window.humidity 		= parseInt( data.query.results.channel.atmosphere.humidity );
+				window.pressure 		= parseInt( data.query.results.channel.atmosphere.pressure );
+				window.rising 			= parseInt( data.query.results.channel.atmosphere.rising );
+				window.windChill 		= parseInt( data.query.results.channel.wind.chill );
+				window.windDirection 	= parseInt( data.query.results.channel.wind.direction );
+				window.windSpeed 		= parseInt( data.query.results.channel.wind.speed );
+
+				// on imprime toutes les données accessibles
+				console.log(post);
+
+				// On récupère les prévisions jusqu'à jour +4
+				// /!\ Aujourd'hui = n+0
+				window.jour = [];
+				for ( i=0; i<5; i++ ) {
+					var day 		= data.query.results.channel.item.forecast[i].day,
+						highFar 	= parseInt( data.query.results.channel.item.forecast[i].high ),
+						lowFar 		= parseInt( data.query.results.channel.item.forecast[i].low ),
+						highDeg 	= convertFarenheit(highFar),
+						lowDeg 		= convertFarenheit(lowFar),
+						text 		= data.query.results.channel.item.forecast[i].text;
+
+						// On stocke ces données dans des variables de type:
+						// jour[n]['texte'] pour pouvoir les utiliser facilement
+						jour[i] = {
+							'jour': convertDay( data.query.results.channel.item.forecast[i].day ),
+							'maxFar': parseInt( data.query.results.channel.item.forecast[i].high ),
+							'minFar': parseInt( data.query.results.channel.item.forecast[i].low ),
+							'maxDeg': convertFarenheit(highFar),
+							'minDeg': convertFarenheit(lowFar),
+							'texte': data.query.results.channel.item.forecast[i].text,
+						};
+				}
+
+				// On imprime ces données dans la console
+				index = 0;
+				jour.forEach( function(i) {
+					console.log('\n\nJour +' + index + '\n');
+					console.log('--------------------------------------------');
+					console.log('jour[' + index + ']["jour"] : ', i["jour"]);
+					console.log('jour[' + index + ']["maxFar"] : ', i["maxFar"]);
+					console.log('jour[' + index + ']["minFar"] : ', i["minFar"]);
+					console.log('jour[' + index + ']["maxDeg"] : ', i["maxDeg"]);
+					console.log('jour[' + index + ']["minDeg"] : ', i["minDeg"]);
+					console.log('jour[' + index + ']["texte"] : ', i["texte"]);
+					index++;
+				});
+
+				// On imprime les autres infos dans la console
+				console.log("\n\nAujourd'hui : \n");
+				console.log('--------------------------------------------');
+				console.log("city : ", city);
+				console.log("country : ", country);
+				console.log("lat : ", lat);
+				console.log("long : ", long);
+				console.log("tempFar : ", tempFar);
+				console.log("tempDeg : ", tempDeg);
+				console.log("pressure : ", pressure);
+				console.log("rising : ", rising);
+				console.log("windChill : ", windChill);
+				console.log("windDirection : ", windDirection);
+				console.log("windSpeed : ", windSpeed);
+			});
+		</script>
+
+
+	</body>
+</html>

@@ -24,14 +24,17 @@ function getValues() {
 	})
 }
 
-// On stocke dans le navigateur la dernière ville définie par l'utilisateur
-$('.ville').bind('input propertychange', function() {
-	localStorage.setItem("ville", $(this).val() || 'berlin')
-});
-
-// On stocke dans le navigateur le texte défini par l'utilisateur
-$('.custom').bind('input propertychange', function() {
-	localStorage.setItem("custom", $(this).html() || 'abcdefghijklmnopqrstuvwxyz<br/>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>0123456789')
+$(function(){
+	// On stocke dans le navigateur la dernière ville définie par l'utilisateur
+	$('.ville').bind('input propertychange', function() {
+		var ville = $(this).val() !='' ? $(this).val() : 'Berlin';
+		localStorage.setItem("ville", ville );
+	});
+	// On stocke dans le navigateur le texte défini par l'utilisateur
+	$('.custom').bind('input propertychange', function() {
+		var custom = $(this).val() !='' ? $(this).val() : 'abcdefghijklmnopqrstuvwxyz\nABCDEFGHIJKLMNOPQRSTUVWXYZ\n0123456789';
+		localStorage.setItem("custom", custom );
+	});
 });
 
 $(window).load( function(){
@@ -39,5 +42,9 @@ $(window).load( function(){
 	// On récupère la dernière ville utilisée
 	$('.ville').val( localStorage.getItem("ville") );
 	// On récupère le texte de l'utilisateur
-	$('.custom').html( localStorage.getItem("custom") );
+	$('.custom').val( localStorage.getItem("custom") );
+});
+
+$('#download').on('click', function() {
+	font.download();
 })

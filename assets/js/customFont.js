@@ -41,7 +41,7 @@ setTimeout(function(){
 	    o = new p.Glyph({
 	        name: 'o',
 	        unicode: 'o',
-	        advanceWidth: 530
+	        advanceWidth: 580
 	    }),
 		c = new p.Glyph({
 			name: 'c',
@@ -51,7 +51,7 @@ setTimeout(function(){
 		r = new p.Glyph({
 	        name: 'r',
 	        unicode: 'r',
-	        advanceWidth: 420
+	        advanceWidth: 460
 	    }),
 		u = new p.Glyph({
 			name: 'u',
@@ -78,6 +78,11 @@ setTimeout(function(){
 			unicode: 'L',
 			advanceWidth: 700
 		}),
+		O = new p.Glyph({
+			name: 'O',
+			unicode: 'O',
+			advanceWidth: 750
+		}),
 		T = new p.Glyph({
 	        name: 'T',
 	        unicode: 'T',
@@ -86,7 +91,12 @@ setTimeout(function(){
 		Z = new p.Glyph({
 	        name: 'Z',
 	        unicode: 'Z',
-	        advanceWidth: 750 + random20_200
+	        advanceWidth: 1100
+	    }),
+		zero = new p.Glyph({
+	        name: 'zero',
+	        unicode: '0',
+	        advanceWidth: 580
 	    }),
 		shape,
 		counter;
@@ -116,6 +126,11 @@ setTimeout(function(){
 		shape = new p.Path.Rectangle({
 		    point: [60, 0],
 		    size: [100, 500]
+		});
+		i.addContour(shape);
+		shape = new p.Path.Rectangle({
+		    point: [60, 550 + window.tempDeg * 10 ],
+		    size: [100, 100]
 		});
 		i.addContour(shape);
 
@@ -155,105 +170,105 @@ setTimeout(function(){
 		r.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [330, 450],
-			radius: [ window.lat, window.lat ]
+			radius: window.lat
 		});
 		r.addContour(shape);
 
 		// u contours
 		shape = new p.Path.Circle({
 			center: [50, 520],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [150, 120],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [150, 220],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [150, 320],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [150, 420],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [150, 520],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [250, 20],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [250, 120],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [250, 220],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [250, 320],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [250, 420],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [250, 520],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [350, 20],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [450, 120],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [450, 220],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [450, 320],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [450, 420],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [450, 520],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 		u.addContour(shape);
 		shape = new p.Path.Circle({
 			center: [550, 20],
-			radius: [random5_40, random5_40]
+			radius: random5_40
 		});
 		u.addContour(shape);
 
@@ -344,35 +359,62 @@ setTimeout(function(){
 		});
 		T.addContour(shape);
 
+		// O contour
+		shape = new p.Path.Star({
+			center: [ 350, 350 ],
+		    points: windSpeed,
+		    radius1: window.pressure,
+			radius2: 400
+		});
+		counter = new p.Path.Circle({
+			center: [ 350, 350 ],
+			radius: window.windDirection
+		})
+		shape = shape.subtract(counter);
+		O.addContour(shape);
+
 		// Z contour
 		shape = new p.Path.Rectangle({
-		    point: [290, 0],
-		    size: [120, 800]
+		    point: [290, -20],
+		    size: [120, 700]
 		});
-		shape.rotate(-45);
-		shape.translate(50, -10);
+		shape.rotate(- window.tempFar );
+		shape.translate(150, 50);
 		Z.addContour(shape);
-		shape = new p.Path.Circle({
-			center: [100, 750 - random20_200],
-			radius: [random20_200, random20_200]
+		shape = new p.Path.Rectangle({
+		    point: [ 50, 650 ],
+		    size: [ 900, 120 ]
 		});
 		Z.addContour(shape);
-		shape = new p.Path.Circle({
-			center: [650, random20_200],
-			radius: [random20_200, random20_200]
+		shape = new p.Path.Rectangle({
+			point: [ 50, 0 ],
+			size: [ 900, 120 ]
 		});
 		Z.addContour(shape);
 
-
+		// 0 contour
+		shape = new p.Path.Star({
+			center: [ 250, 250 ],
+		    points: 12,
+		    radius1: 100,
+			radius2: 200
+		});
+		counter = new p.Path.Circle({
+			center: 250,
+			radius: 100
+		})
+		shape = shape.subtract(counter);
+		shape.translate(0, tempFar * 8 );
+		zero.addContour(shape);
 
 		window.font = font;
 
 		///////////////////////////////////////////////////////////////////
 		// On insère les glyphes dans la fonte
 		// Puis on la met à jour
-		font.addGlyphs([ a, c, i, o, r, u, B, H, I, L, T, Z ]);
+		font.addGlyphs([ a, c, i, o, r, u, B, H, I, L, O, T, Z, zero ]);
 		font.updateOTCommands()
 		    .addToFonts();
 
 })(plumin.paper);
-}, 500);
+}, 700);

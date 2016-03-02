@@ -1,0 +1,21 @@
+{
+  "name": "workshop-plumin",
+  "version": "1.0.0",
+  "description": "Weather controlled letters",
+  "main": "index.html",
+  "scripts": {
+    "serve": "gulp serve"
+  },
+  "author": "louisremi@prototypo.io",
+  "license": "MIT",
+  "dependencies": {
+    "normalize.css": "^3.0.3",
+    "whatwg-fetch": "^0.11.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "eslint": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-shelter": "^1.0.1"
+  }
+}

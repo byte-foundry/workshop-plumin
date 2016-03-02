@@ -3,19 +3,19 @@ setTimeout(function(){
 
 	///////////////////////////////////////////////////////////////////
 	// predefined random values
- 	random		= Math.floor((Math.random() * 100) + 1),
-	random10	= Math.floor((Math.random() * 10) + 1),
-	random100	= Math.floor((Math.random() * 100) + 1),
-	random5_40	= Math.floor((Math.random() * 40) + 5),
-	random20	= Math.floor((Math.random() * 20) + 1),
-	random50	= Math.floor((Math.random() * 50) + 1),
-	random10_180	= Math.floor((Math.random() * 180) + 10);
-	random10_100	= Math.floor((Math.random() * 100) + 10);
-	random20_200	= Math.floor((Math.random() * 200) + 20);
-	random50_800	= Math.floor((Math.random() * 800) + 50);
-	random120_400	= Math.floor((Math.random() * 400) + 120);
-	random100_4000	= Math.floor((Math.random() * 4000) + 100);
-	random08_3	= Math.floor((Math.random() * 3) + 0.8);
+	// var random			= Math.floor((Math.random() * 100) + 1);
+	// var random10		= Math.floor((Math.random() * 10) + 1);
+	var random100		= Math.floor((Math.random() * 100) + 1);
+	var random5_40		= Math.floor((Math.random() * 40) + 5);
+	// var random20		= Math.floor((Math.random() * 20) + 1);
+	// var random50		= Math.floor((Math.random() * 50) + 1);
+	var random10_180	= Math.floor((Math.random() * 180) + 10);
+	// var random10_100	= Math.floor((Math.random() * 100) + 10);
+	// var random20_200	= Math.floor((Math.random() * 200) + 20);
+	var random50_800	= Math.floor((Math.random() * 800) + 50);
+	var random120_400	= Math.floor((Math.random() * 400) + 120);
+	var random100_4000	= Math.floor((Math.random() * 4000) + 100);
+	var random08_3		= Math.floor((Math.random() * 3) + 0.8);
 
 	///////////////////////////////////////////////////////////////////
 	// On initialise plumin.js
@@ -24,55 +24,55 @@ setTimeout(function(){
 	///////////////////////////////////////////////////////////////////
 	// On déclare les glyphes et leur encombrement (largeur de cadratin)
 	var font = new p.Font({
-	        familyName: 'Demo',
-	        ascender: 800,
-	        descender: -100
-	    }),
-	    a = new p.Glyph({
-	        name: 'a',
-	        unicode: 'a',
-	        advanceWidth: 520
-	    }),
-	    i = new p.Glyph({
-	        name: 'i',
-	        unicode: 'i',
-	        advanceWidth: 268
-	    }),
-	    o = new p.Glyph({
-	        name: 'o',
-	        unicode: 'o',
-	        advanceWidth: 580
-	    }),
+			familyName: 'Demo',
+			ascender: 800,
+			descender: -100
+		}),
+		a = new p.Glyph({
+			name: 'a',
+			unicode: 'a',
+			advanceWidth: 520
+		}),
+		i = new p.Glyph({
+			name: 'i',
+			unicode: 'i',
+			advanceWidth: 268
+		}),
+		o = new p.Glyph({
+			name: 'o',
+			unicode: 'o',
+			advanceWidth: 580
+		}),
 		c = new p.Glyph({
 			name: 'c',
 			unicode: 'c',
 			advanceWidth: 512
 		}),
 		r = new p.Glyph({
-	        name: 'r',
-	        unicode: 'r',
-	        advanceWidth: 460
-	    }),
+			name: 'r',
+			unicode: 'r',
+			advanceWidth: 460
+		}),
 		u = new p.Glyph({
 			name: 'u',
 			unicode: 'u',
 			advanceWidth: 590
 		}),
 		B = new p.Glyph({
-	        name: 'B',
-	        unicode: 'B',
-	        advanceWidth: 700 * random08_3
-	    }),
+			name: 'B',
+			unicode: 'B',
+			advanceWidth: 700 * random08_3
+		}),
 		H = new p.Glyph({
-	        name: 'H',
-	        unicode: 'H',
-	        advanceWidth: 700 + random100_4000
-	    }),
+			name: 'H',
+			unicode: 'H',
+			advanceWidth: 700 + random100_4000
+		}),
 		I = new p.Glyph({
-	        name: 'I',
-	        unicode: 'I',
-	        advanceWidth: 120 + random120_400
-	    }),
+			name: 'I',
+			unicode: 'I',
+			advanceWidth: 120 + random120_400
+		}),
 		L = new p.Glyph({
 			name: 'L',
 			unicode: 'L',
@@ -84,20 +84,20 @@ setTimeout(function(){
 			advanceWidth: 750
 		}),
 		T = new p.Glyph({
-	        name: 'T',
-	        unicode: 'T',
-	        advanceWidth: 700
-	    }),
+			name: 'T',
+			unicode: 'T',
+			advanceWidth: 700
+		}),
 		Z = new p.Glyph({
-	        name: 'Z',
-	        unicode: 'Z',
-	        advanceWidth: 1100
-	    }),
+			name: 'Z',
+			unicode: 'Z',
+			advanceWidth: 1100
+		}),
 		zero = new p.Glyph({
-	        name: 'zero',
-	        unicode: '0',
-	        advanceWidth: 580
-	    }),
+			name: 'zero',
+			unicode: '0',
+			advanceWidth: 580
+		}),
 		shape,
 		counter;
 
@@ -108,36 +108,36 @@ setTimeout(function(){
 
 		// a contour
 		shape = new p.Path.RegularPolygon({
-		    center: [268, 124],
-		    sides: 3,
-		    radius: 248
+			center: [268, 124],
+			sides: 3,
+			radius: 248
 		});
 		shape.rotate(180, [268, 124]);
 		shape.scale(1, 1.4, [268, 0]);
 		counter = new p.Path.RegularPolygon({
-		    center: [268, 110],
-		    sides: 3,
-		    radius: 248
+			center: [268, 110],
+			sides: 3,
+			radius: 248
 		});
 		counter.scale(1, 1.4, [268, 0]);
 		a.addContour(shape.subtract(counter));
 
 		// i contour
 		shape = new p.Path.Rectangle({
-		    point: [60, 0],
-		    size: [100, 500]
+			point: [60, 0],
+			size: [100, 500]
 		});
 		i.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [60, 550 + window.tempDeg * 10 ],
-		    size: [100, 100]
+			point: [60, 550 + window.tempDeg * 10 ],
+			size: [100, 100]
 		});
 		i.addContour(shape);
 
 		// o contour
 		shape = new p.Path.Ellipse({
-		    point: [20, 0],
-		    size: [500, 500]
+			point: [20, 0],
+			size: [500, 500]
 		});
 		counter = new p.Path.Ellipse({
 			point: [225, 250 - random50_800 / 2],
@@ -164,8 +164,8 @@ setTimeout(function(){
 
 		// r contour
 		shape = new p.Path.Rectangle({
-		    point: [80, 0],
-		    size: [120, 500]
+			point: [80, 0],
+			size: [120, 500]
 		});
 		r.addContour(shape);
 		shape = new p.Path.Circle({
@@ -274,17 +274,17 @@ setTimeout(function(){
 
 		// B contour
 		shape = new p.Path.RegularPolygon({
-		    center: [268, 124],
-		    sides: 3,
-		    radius: 300
+			center: [268, 124],
+			sides: 3,
+			radius: 300
 		});
 		shape.rotate(90, [268, 124]);
 		shape.scale( random08_3, 1, [0, 0]);
 		B.addContour(shape);
 		shape = new p.Path.RegularPolygon({
-		    center: [768, 124],
-		    sides: 3,
-		    radius: 300
+			center: [768, 124],
+			sides: 3,
+			radius: 300
 		});
 		shape.rotate(90, [268, 124]);
 		shape.scale( random08_3, 1, [0, 0]);
@@ -292,42 +292,42 @@ setTimeout(function(){
 
 		// H contour
 		shape = new p.Path.Rectangle({
-		    point: [100, 0],
-		    size: [120, 770]
+			point: [100, 0],
+			size: [120, 770]
 		});
 		H.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [500 + random100_4000, 0],
-		    size: [120, 770]
+			point: [500 + random100_4000, 0],
+			size: [120, 770]
 		});
 		H.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [110, 320],
-		    size: [500 + random100_4000, 120]
+			point: [110, 320],
+			size: [500 + random100_4000, 120]
 		});
 		H.addContour(shape);
 
 		// I contour
 		shape = new p.Path.Rectangle({
-		    point: [ random120_400 / 2 + 50 - 60 , 0],
-		    size: [120, 770]
+			point: [ random120_400 / 2 + 50 - 60 , 0],
+			size: [120, 770]
 		});
 		I.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [ 50, 750 ],
-		    size: [ random120_400, 20 ]
+			point: [ 50, 750 ],
+			size: [ random120_400, 20 ]
 		});
 		I.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [ 50, 0 ],
-		    size: [ random120_400, 20 ]
+			point: [ 50, 0 ],
+			size: [ random120_400, 20 ]
 		});
 		I.addContour(shape);
 
 		// L contour
 		shape = new p.Path.Rectangle({
-		    point: [80, 0],
-		    size: [random100, 770]
+			point: [80, 0],
+			size: [random100, 770]
 		});
 		L.addContour(shape);
 		shape = new p.Path.Rectangle({
@@ -336,8 +336,8 @@ setTimeout(function(){
 		});
 		L.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [80, 0 ],
-		    size: [550, random100 ]
+			point: [80, 0 ],
+			size: [550, random100 ]
 		});
 		L.addContour(shape);
 		L.addContour(shape);
@@ -349,21 +349,21 @@ setTimeout(function(){
 
 		// T contour
 		shape = new p.Path.Rectangle({
-		    point: [290, 0],
-		    size: [120, 770]
+			point: [290, 0],
+			size: [120, 770]
 		});
 		T.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [30, 770 - random10_180 ],
-		    size: [640, random10_180 ]
+			point: [30, 770 - random10_180 ],
+			size: [640, random10_180 ]
 		});
 		T.addContour(shape);
 
 		// O contour
 		shape = new p.Path.Star({
 			center: [ 350, 350 ],
-		    points: windSpeed,
-		    radius1: window.pressure,
+			points: window.windSpeed,
+			radius1: window.pressure,
 			radius2: 400
 		});
 		counter = new p.Path.Circle({
@@ -375,15 +375,15 @@ setTimeout(function(){
 
 		// Z contour
 		shape = new p.Path.Rectangle({
-		    point: [290, -20],
-		    size: [120, 700]
+			point: [290, -20],
+			size: [120, 700]
 		});
 		shape.rotate(- window.tempFar );
 		shape.translate(150, 50);
 		Z.addContour(shape);
 		shape = new p.Path.Rectangle({
-		    point: [ 50, 650 ],
-		    size: [ 900, 120 ]
+			point: [ 50, 650 ],
+			size: [ 900, 120 ]
 		});
 		Z.addContour(shape);
 		shape = new p.Path.Rectangle({
@@ -395,8 +395,8 @@ setTimeout(function(){
 		// 0 contour
 		shape = new p.Path.Star({
 			center: [ 250, 250 ],
-		    points: 12,
-		    radius1: 100,
+			points: 12,
+			radius1: 100,
 			radius2: 200
 		});
 		counter = new p.Path.Circle({
@@ -404,7 +404,7 @@ setTimeout(function(){
 			radius: 100
 		})
 		shape = shape.subtract(counter);
-		shape.translate(0, tempFar * 8 );
+		shape.translate(0, window.tempFar * 8 );
 		zero.addContour(shape);
 
 		window.font = font;
@@ -414,7 +414,7 @@ setTimeout(function(){
 		// Puis on la met à jour
 		font.addGlyphs([ a, c, i, o, r, u, B, H, I, L, O, T, Z, zero ]);
 		font.updateOTCommands()
-		    .addToFonts();
+			.addToFonts();
 
 })(plumin.paper);
 }, 700);
